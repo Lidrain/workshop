@@ -52,6 +52,10 @@
       <Project>{61291671-72c6-45b0-898b-5e4d90c9b9df}</Project>
       <Name>PromotionCS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestProject\TestProject.csproj">
+      <Project>{508a360c-f642-47dd-99d3-37a05184610a}</Project>
+      <Name>TestProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
