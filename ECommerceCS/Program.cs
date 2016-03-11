@@ -14,10 +14,16 @@ namespace ECommerceCS
         static void Main(string[] args)
         {
             Order order = new Order();
+            Promotion promo = new Promotion();
+            promo.DiscountScheme = 1;
+            promo.DiscountPercent = 0.3;
+            promo.MinItems = 2;
+
             String x = "0";
             while(!x.Equals("6"))
             {
                 Console.WriteLine("\n");
+                Console.WriteLine("Press 0 to select promotion.");
                 Console.WriteLine("Press 1 to enable/disable discount.");
                 Console.WriteLine("Press 2 change discount amount for any dates.");
                 Console.WriteLine("Press 3 to add product to shopping cart.");
@@ -26,15 +32,52 @@ namespace ECommerceCS
                 Console.WriteLine("Press 6 to exit.");
 
                 x = Console.ReadLine();
-                //Console.WriteLine("X"+(char)x);
-                if (x.Equals("1"))
+                if (x.Equals("0")) {
+                    Console.Clear();
+                    Console.WriteLine("Select promotion scheme no (1-3, default: 1): ");
+                    x = Console.ReadLine();
+                    if (x.Equals("1")) 
+                    {
+                        promo = new Promotion();
+                        promo.DiscountScheme = 1;
+                        promo.DiscountPercent = 0.3;
+                        promo.MinItems = 2;
+                    }
+
+                    else if (x.Equals("2")) 
+                    {
+                        promo.DiscountScheme = 2;
+                        promo.DiscountPercent = 0.1;
+                        promo.SecondDiscount = 0.2;
+                        promo.MinItems = 2;
+                    }
+                    else if (x.Equals("3")) 
+                    {
+                        promo.DiscountScheme = 3;
+                        promo.DiscountPrice = 20;
+                        promo.MinItems = 3;
+                    }
+                }
+
+                else if (x.Equals("1"))
                 {
-                    Console.WriteLine("Entered to enable/disable discount.");
+                    if (promo.IsEnabled)
+                    {
+                        promo.IsEnabled = false;
+                        Console.WriteLine("Discount is disabled");
+                    }
+                    else 
+                    {
+                        promo.IsEnabled = true;
+                        Console.WriteLine("Discount is enabled");
+                    }
+
                 }
                 else if (x.Equals("2"))
                 {
                     Console.WriteLine("Entered to enable/disable discount.");
                 }
+
                 else if (x.Equals("3"))
                 {
                     Console.WriteLine("\n");
