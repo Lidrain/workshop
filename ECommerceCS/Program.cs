@@ -24,6 +24,7 @@ namespace ECommerceCS
             {
                 Console.WriteLine("\n");
                 Console.Clear();
+                Console.WriteLine("=================================================");
                 Console.WriteLine("Press 0 to select promotion.");
                 Console.WriteLine("Press 1 to enable/disable discount.");
                 Console.WriteLine("Press 2 change discount amount for any dates.");
@@ -31,6 +32,7 @@ namespace ECommerceCS
                 Console.WriteLine("Press 4 to display total price.");
                 Console.WriteLine("Press 5 to display shopping cart.");
                 Console.WriteLine("Press 6 to exit.");
+                Console.WriteLine("=================================================");
 
                 x = Console.ReadLine();
                 if (x.Equals("0")) {
@@ -85,12 +87,14 @@ namespace ECommerceCS
                     while (!y.Equals("5")) { 
                         Console.WriteLine("\n");
                         Console.Clear();
+                        Console.WriteLine("=================================================");
                         Console.WriteLine("Select the product to add. NOTE: only 1 quantity");
                         Console.WriteLine("1 - Red Dress $100.00");
                         Console.WriteLine("2 - Blue Dress $100.00");
                         Console.WriteLine("3 - Green Dress $100.00");
                         Console.WriteLine("4 - White Socks $10.00");
-                        Console.WriteLine("5 - Return to main");
+                        Console.WriteLine("5 - Return to main manu.");
+                        Console.WriteLine("=================================================");
                         List<OrderItem> list = order.Items;
                         Console.Write("[Current items in cart: ");
                         
@@ -105,7 +109,7 @@ namespace ECommerceCS
                                 Console.Write(",");
                             Console.Write(oi.Product.Name);
                         }
-                        Console.Write("]");
+                        Console.Write("] ");
                         y = Console.ReadLine();
                         if (y.Equals("1"))
                         {
@@ -142,22 +146,25 @@ namespace ECommerceCS
                 else if (x.Equals("4"))
                 {
                     //Console.WriteLine("Items in shopping cart:");
-                    Console.WriteLine("Total Price:" + order.TotalPrice);
+                    DiscountCalculator dc = new DiscountCalculator(promo);
+                    Order newOrder = dc.CalculateDiscount(order);
+                    Console.WriteLine("Total Price: " + newOrder.TotalPrice);
                 }
                 else if (x.Equals("5"))
                 {
                     //Console.WriteLine("Items in shopping cart:");
-                    Console.WriteLine("List of items in shopping cart:");
+                    Console.WriteLine("List of items in shopping cart: ");
                     List<OrderItem> list = order.Items;
                     for(int i=0;i<list.Count;i++){
                         OrderItem oi = list[i];
-                        Console.WriteLine(oi.Product.Name);
+                        Console.WriteLine(i+". "+oi.Product.Name);
                     }
                     
                 }
+                
                 System.Threading.Thread.Sleep(1500);
             }
-
+            Console.WriteLine("Exit Application");
             //Console.ReadKey();
         }
     }
