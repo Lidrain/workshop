@@ -14,6 +14,7 @@ namespace PromotionCS
         private double usualPrice;
         private double discountPrice;
         private int discountScheme;
+        private bool isEnabled = true;
 
         public Promotion() { }
         public double DiscountPercent
@@ -50,6 +51,11 @@ namespace PromotionCS
         {
             get { return discountScheme; }
             set { discountScheme = value; }
+        }
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set { isEnabled = value; }
         }
     }
 }

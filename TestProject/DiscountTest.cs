@@ -356,6 +356,31 @@ namespace TestProject
             //verify
             double expectedValue = 25*3 + 15 + 2*100.0 + 10.0;
             Assert.AreEqual(expectedValue, newOrder.TotalPrice, 0.001);
-        } 
+        }
+
+        [TestMethod]
+        public void TestDisableDiscount()
+        {
+            //setup
+            Promotion promo = new Promotion();
+            promo.DiscountScheme = 2;
+            promo.DiscountPercent = 0.1;
+            promo.SecondDiscount = 0.2;
+            promo.MinItems = 2;
+            promo.IsEnabled = false;
+
+            DiscountCalculator dc = new DiscountCalculator(promo);
+
+            Order order = new Order();
+            order.Add(Products.GetProduct("blueDress"), 2);
+            order.Add(Products.GetProduct("whiteSocks"), 1);
+
+            //exercise
+            Order newOrder = dc.CalculateDiscount(order);
+
+            //verify
+            double expectedValue = 2*100 + 10.0;
+            Assert.AreEqual(expectedValue, newOrder.TotalPrice, 0.001);
+        }
     }
 }

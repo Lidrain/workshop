@@ -23,6 +23,9 @@ namespace PromotionCS
 
         public Order CalculateDiscount(Order order)
         {
+            if (!promotion.IsEnabled)
+                return order;
+
             order.SortBySku();
             switch (promotion.DiscountScheme) {
                 case 1:
