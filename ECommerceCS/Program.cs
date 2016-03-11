@@ -169,7 +169,7 @@ namespace ECommerceCS
                     //dc.CalculateDiscount(order);
                     //Console.WriteLine("Items in shopping cart:");
                     //DiscountCalculator dc = new DiscountCalculator(promo);
-                   // Order newOrder = dc.CalculateDiscount(order);
+                    Order newOrder = dc.CalculateDiscount(order);
                     Console.WriteLine("Total Price: " + newOrder.TotalPrice);
                 }
                 else if (x.Equals("5"))
