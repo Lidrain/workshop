@@ -106,6 +106,23 @@ namespace ECommerceCS
                     //2001.1, "White Socks", 10.0
                     //2001.2, "Red Socks", 10.0
                 }
+                else if (x.Equals("4"))
+                {
+                    //Console.WriteLine("Items in shopping cart:");
+                    Console.WriteLine("Total Price:" + order.TotalPrice);
+                }
+                else if (x.Equals("5"))
+                {
+                    //Console.WriteLine("Items in shopping cart:");
+                    Console.WriteLine("List if items in shopping cart");
+                    List<OrderItem> list = order.Items;
+                    for(int i=0;i<list.Count;i++){
+                        OrderItem oi = list[i];
+                        Console.WriteLine(oi.Product.Name);
+                    }
+                    
+                }
+
             }
 
             //Console.ReadKey();
