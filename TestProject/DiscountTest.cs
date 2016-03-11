@@ -382,5 +382,64 @@ namespace TestProject
             double expectedValue = 2*100 + 10.0;
             Assert.AreEqual(expectedValue, newOrder.TotalPrice, 0.001);
         }
+
+
+        [TestMethod]
+        public void TestChangeDiscountPrice()
+        {
+            //setup
+            Promotion promo = new Promotion();
+            promo.DiscountScheme = 3;
+            promo.DiscountPrice = 25;
+            promo.MinItems = 3;
+
+            DiscountCalculator dc = new DiscountCalculator(promo);
+
+            Order order = new Order();
+            order.Add(Products.GetProduct("invisibleSocks"), 3);
+
+            //exercise
+            Order newOrder = dc.CalculateDiscount(order);
+            double initialPrice = newOrder.TotalPrice;
+
+            promo.DiscountPrice = 35;
+
+            //dc.Promotion = promo;
+            Order newDiscountedOrder = dc.CalculateDiscount(order);
+            double changedPrice = newDiscountedOrder.TotalPrice;
+
+            //verify
+            double expectedValue = -10;
+            Assert.AreEqual(expectedValue, changedPrice - initialPrice, 0.001);
+        }
+
+        [TestMethod]
+        public void TestChangeDiscountPercent()
+        {
+            //setup
+            Promotion promo = new Promotion();
+            promo.DiscountScheme = 1;
+            promo.DiscountPercent = 0.2;
+            promo.MinItems = 2;
+
+            DiscountCalculator dc = new DiscountCalculator(promo);
+
+            Order order = new Order();
+            order.Add(Products.GetProduct("blueDress"), 2);
+
+            //exercise
+            Order newOrder = dc.CalculateDiscount(order);
+            double initialPrice = newOrder.TotalPrice;
+
+            promo.DiscountPercent = 0.5;
+
+            //dc.Promotion = promo;
+            Order newDiscountedOrder = dc.CalculateDiscount(order);
+            double changedPrice = newDiscountedOrder.TotalPrice;
+
+            //verify
+            double expectedValue = -30;
+            Assert.AreEqual(expectedValue, changedPrice - initialPrice, 0.001);
+        }
     }
 }
