@@ -18,6 +18,7 @@ namespace ECommerceCS
             promo.DiscountScheme = 1;
             promo.DiscountPercent = 0.3;
             promo.MinItems = 2;
+            DiscountCalculator dc = new DiscountCalculator(promo);
 
             String x = "0";
             while(!x.Equals("6"))
@@ -75,7 +76,27 @@ namespace ECommerceCS
                 }
                 else if (x.Equals("2"))
                 {
-                    Console.WriteLine("Entered to enable/disable discount.");
+                    if (promo.DiscountScheme == 1 || promo.DiscountScheme == 2)
+                    {
+                        Console.WriteLine("Enter new discount: ");
+                        x = Console.ReadLine();
+                        double newDiscount = 0.0;
+                        Double.TryParse(x, out newDiscount);
+                        if (newDiscount > 0)
+                        {
+                            promo.DiscountPercent = newDiscount;
+                        }
+                    }
+                    else {
+                        Console.WriteLine("Enter new discount value: ");
+                        x = Console.ReadLine();
+                        double newDiscount = 0.0;
+                        Double.TryParse(x, out newDiscount);
+                        if (newDiscount > 0)
+                        {
+                            promo.DiscountPrice = newDiscount;
+                        }
+                    }
                 }
 
                 else if (x.Equals("3"))
@@ -108,6 +129,7 @@ namespace ECommerceCS
                 }
                 else if (x.Equals("4"))
                 {
+                    dc.CalculateDiscount(order);
                     //Console.WriteLine("Items in shopping cart:");
                     Console.WriteLine("Total Price:" + order.TotalPrice);
                 }
